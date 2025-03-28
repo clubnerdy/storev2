@@ -7,6 +7,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class StoreController {
 
+    private StoreService storeService;
+
+    public StoreController(StoreService storeService) {
+        this.storeService = storeService;
+    }
+
     //홈
     @GetMapping("/")
     public String index() {
@@ -31,8 +37,9 @@ public class StoreController {
         return "store/save-form";
     }
 
-    @PostMapping("/store/save")
-    public  String save () {
+    @PostMapping("/save")
+    public  String save (String name, int stock, int price) {
+        storeService.상품등록(name, stock, price);
         return "redirect:/";
     }
 
