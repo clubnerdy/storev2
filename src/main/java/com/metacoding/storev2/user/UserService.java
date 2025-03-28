@@ -22,4 +22,18 @@ public class UserService {
         userRepository.save(joinDTO.getUsername(), joinDTO.getPassword(), joinDTO.getUsername());
 
     }
+
+    public User 로그인(UserRequest.LoginDTO loginDTO) {
+        // 1. 유저네임 존재하니?
+        User user = userRepository.findByUsername(loginDTO.getUsername());
+
+        // 2. 유저네임 없거나 비밀번호 불일치하면
+        if (user == null)
+            throw new RuntimeException("해당하는 username이 없습니다.");
+        if (!(user.getPassword().equals(loginDTO.getPassword())))
+            throw new RuntimeException("비밀번호가 일치하지 않습니다.");
+
+        // 3. 없음 말고. 로그인 ㄱ
+        return user;
+    }
 }
