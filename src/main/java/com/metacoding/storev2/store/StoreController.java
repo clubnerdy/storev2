@@ -3,6 +3,7 @@ package com.metacoding.storev2.store;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -23,8 +24,10 @@ public class StoreController {
     }
 
     // 상품 상세보기
-    @GetMapping("/detail")
-    public  String detail () {
+    @GetMapping("/store/{id}")
+    public  String detail (@PathVariable int id, HttpServletRequest request) {
+        Store store = storeService.상세보기(id);
+        request.setAttribute("model", store);
         return "store/detail";
     }
 

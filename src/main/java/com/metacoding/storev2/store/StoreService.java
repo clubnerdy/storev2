@@ -25,4 +25,8 @@ public class StoreService {
     }
 
 
+    public Store 상세보기(int id) {
+        Store store = storeRepository.findById(id);
+        return store;
+    }
 }

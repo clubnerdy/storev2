@@ -15,6 +15,12 @@ public class StoreRepository {
         this.em = em;
     }
 
+    public Store findById(int id) {
+        Query query = em.createNativeQuery("select * from store_tb where id = ?", Store.class);
+        query.setParameter(1, id);
+        return (Store) query.getSingleResult();
+    }
+
     public void save(String name, int stock, int price) {
         Query query = em.createNativeQuery("insert into store_tb(name, stock, price) values(?, ?, ?)");
         query.setParameter(1, name);
